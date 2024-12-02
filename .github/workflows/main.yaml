@@ -24,21 +24,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Verify external URL is reachable
-      - name: Verify external URL
-        run: curl -I https://formy-project.herokuapp.com
-
-      # Step 5: Run Cypress tests using cypress-io action
+      # Step 4: Run Cypress tests using cypress-io action
       - name: Run Cypress tests
         uses: cypress-io/github-action@v2
         with:
-          config-file: cypress.config.js
+          config-file: cypress.config.ts
           start: ""
           wait-on-timeout: 120
           spec: |
             cypress/e2e/api/getName.feature
 
-      # Step 6: Upload test artifacts if Cypress fails
+      # Step 5: Upload test artifacts if Cypress fails
       - name: Upload Cypress artifacts
         if: failure()
         uses: actions/upload-artifact@v3
