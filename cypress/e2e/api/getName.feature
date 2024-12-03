@@ -12,8 +12,12 @@ Feature: Testing the Agify API for Name
     Then the name should be "billy's"
     And the age should be "42"
 
-  Scenario: No name provided
+  Scenario: Provided blank name
     Given I provide the name "" to the API
     Then the response should be 200 and contain the correct JSON structure
     And the name should be ""
     And the age should be "null"
+  #Scenario: Provided Invalide name
+  #  Given I provide the name "" to the API
+  #  Then the response should be 400
+  #  And the error massage should be "name not found"

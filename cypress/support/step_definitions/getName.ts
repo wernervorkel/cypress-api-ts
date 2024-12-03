@@ -2,24 +2,26 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { expect } from 'chai';
 import Name from '../typings/name'
 
-const baseAPIUrl = Cypress.config('baseUrl');
-
 Given('the API is accessible', () => {
-  cy.request({
-    method: 'GET',
-    url: `/?name`,
-    failOnStatusCode: false,
-  }).as('apiResponse').then((response) => {
-    expect(response.status).to.eq(200);
+  cy.fixture('config.json').then((config) => {
+    cy.request({
+      method: 'GET',
+      url: `/${config.namePath}`,
+      failOnStatusCode: false,
+    }).as('apiResponse').then((response) => {
+      expect(response.status).to.eq(200);
+    });
   });
 });
 
 When('I provide the name {string} to the API', (name: string) => {
-  cy.request({
-    method: 'GET',
-    url: `/?name=${name}`,
-    failOnStatusCode: false,
-  }).as('apiResponse');
+  cy.fixture('config.json').then((config) => {
+    cy.request({
+      method: 'GET',
+      url: `/${config.namePath}=${name}`,
+      failOnStatusCode: false,
+    }).as('apiResponse');
+  });
 });
 
 Then('the response should be {int} and contain the correct JSON structure', (res: number) => {
