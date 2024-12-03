@@ -37,7 +37,8 @@ To install Cypress, follow these steps:
 ```
 cypress/ 
 ├── e2e
-    └──api 
+    └──api
+├── fixtures
 └── support
     ├──step_definitions
     └──typings
